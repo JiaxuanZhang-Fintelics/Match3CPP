@@ -1,12 +1,22 @@
 #include <iostream>
-#include "map.cpp"
+#include "map.h"
+#include "solver.h"
+#include "renderer.h"
+
+
+static void start(Map* m){
+    render(m);
+    while(solve(m)){
+        while(m->reduce());
+        render(m);
+    }
+}
 
 int main() {
-    int pool[25]={1,1,1,0,0,
-0,0,1,0,1,
-0,0,0,0,1,
-0,0,0,0,1,
-1,1,1,1,1};
-    Map m =  Map(5,5,4,25,pool,zero);
+    Map m =  Map(10,10,4,1000,NULL,random);
     render(&m);
+    start(&m);
+    std::cout<<m.remain()<<"remaining\n";
+    std::cout<<m.get_score()<<"\n";
+
 }
