@@ -6,6 +6,7 @@ enum mode { random,three,zero };
 bool compare(int v1,int h1,int v2,int h2); // return true if 2 is better than 1
 class Map{
     private:
+    int* map; // actual map (array of size row*col)
     int row; // number of rows
     int col; // number of cols
     int objs; // number of objects kinds 
@@ -27,16 +28,18 @@ class Map{
     bool reduce_around(int i,int* v,int* h,int* v_idx,int* h_idx); //reduce consecutive objects around i, including i
 
     public:
-    int* map; // actual map (array of size row*col)
     // constructor
     Map(int row, int col, int objs,int pool_size,int* init_pool,mode m);
     void find_around(int i,int* v,int* h,int* v_idx,int* h_idx);// find consecutive objects in four directions
     // for each gird, find consecutive objects and compare, then reduce the best
     bool reduce();
     int remain(); // count not empty gird
+    void swap(int i, int j); // change objects in grid i and j 
+    void free_map();
     // getters of private attributes
     int get_row();
     int get_col();
     int get_score();
+    int* get_map();
 };
 #endif

@@ -229,6 +229,19 @@ bool compare(int v1,int h1,int v2,int h2){
         }
         return count;
     }
+
+    // change objects in grid i and j 
+    void Map::swap(int i,int j){
+        if(map[i]==0 || map[j]==0) return;
+        int temp=map[i];
+        map[i]=map[j];
+        map[j]=temp;
+    }
+
+    void Map::free_map(){
+        free(map);
+        free(pool);
+    }
     
     // getters of private attributes
     int Map::get_row(){
@@ -239,6 +252,9 @@ bool compare(int v1,int h1,int v2,int h2){
     }
     int Map::get_score(){
         return score;
+    }
+    int* Map::get_map(){
+        return map;
     }
 
 #endif
